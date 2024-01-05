@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <style>
+   * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      -webkit-user-select: none;
+   }
+      body {
+         font-family: Arial, sans-serif;
+         margin: 0;
+         background-color: #091930;
+         color: #3BB09E;
+      }
+      
+      main{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+      }
+      
+      img {
+         width: 100%;
+      }
+
+      #game-name {
+         font-size: 24px;
+         margin-bottom: 20px;
+      }
+
+      #board {
+         display: grid;
+         grid-template-columns: repeat(3, 100px);
+         grid-gap: 5px;
+      }
+
+      .cell {
+         width: 100px;
+         height: 100px;
+         border: 2px solid #333;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         cursor: pointer;
+         font-size: 24px;
+         background-color: #091930;
+         color: #3BB09E;
+         transition: background-color 0.3s;
+         overflow: hidden;
+      }
+
+      .cell:hover {
+         background-color: #3BB09E;
+         color: #091930;
+      }
+
+      #result-popup {
+         display: none;
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         padding: 20px;
+         background-color: #fff;
+         border: 2px solid #333;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+         text-align: center;
+         color: #3BB09E;
+      }
+
+      #result-popup img {
+         width: 100px;
+         height: 100px;
+         border-radius: 50%;
+         margin-bottom: 10px;
+      }
+
+      #buttons {
+         margin-top: 15px;
+         display: none;
+      }
+
+      button {
+         padding: 10px;
+         font-size: 16px;
+         cursor: pointer;
+         background-color: #091930;
+         color: #3BB09E;
+         border: 2px solid #3BB09E;
+         border-radius: 5px;
+         margin: 0 10px;
+      }
+   </style>
+   <title>Tic Tac Toe</title>
+</head>
+
+<body>
+   <main>
+
+      <div id="game-name">Tic Tac Toe</div>
+
+      <div id="board"></div>
+
+      <div id="result-popup">
+         <img src="baburao_image.jpg" alt="Baburao">
+         <p id="result-text"></p><br>
+         <button onclick="resetGame()">Play Again</button>
+      </div>
+
+      <div id="buttons">
+         <button onclick="resetGame()">Reset Game</button>
+      </div>
+
+      <audio id="rajuSound" src="raju_sound.mp3"></audio>
+      <audio id="shyamSound" src="shyam_sound.mp3"></audio>
+      <audio id="winSound" src="win_sound.mp3"></audio>
+      <audio id="drawSound" src="draw_sound.mp3"></audio>
+   </main>
+   
+   <script>
+      const board = document.getElementById('board');
+      const cells = [];
+      let currentPlayer = 'Raju';
+      let gameOver = false;
+      let firstClick = true;
+
+      // Create cells and add click event
+      for (let i = 0; i < 9; i++) {
+         const cell = document.createElement('div');
+         cell.classList.add('cell');
+         cell.addEventListener('click', () => makeMove(i));
+         board.appendChild(cell);
+         cells.push(cell);
+      }
+
+      // Winning combinations
+      const winCombos = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+        [0, 4, 8], [2, 4, 6] // Diagonals
+    ];
+
+      // Game state
+      const gameBoard = ['', '', '', '', '', '', '', '', ''];
+
+      function makeMove(index) {
+         if (gameBoard[index] === '' && !gameOver) {
+            playClickSound();
+
+            gameBoard[index] = currentPlayer === 'Raju' ? '<img src="raju_image.jpg" alt="Raju">' : '<img src="shyam_image.jpg" alt="Shyam">';
+            cells[index].innerHTML = gameBoard[index];
+
+            if (firstClick) {
+               firstClick = false;
+               const buttons = document.getElementById('buttons');
+               buttons.style.display = 'flex';
+            }
+
+            if (checkWinner()) {
+               playWinSound();
+               displayResult();
+            } else if (!gameBoard.includes('')) {
+               playDrawSound();
+               displayResult('It\'s a draw! Kya gamer banoge re tum');
+            } else {
+               currentPlayer = currentPlayer === 'Raju' ? 'Shyam' : 'Raju';
+            }
+         }
+      }
+
+      function checkWinner() {
+         for (const combo of winCombos) {
+            const [a, b, c] = combo;
+            if (gameBoard[a] !== '' && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+               return true;
+            }
+         }
+         return false;
+      }
+
+      function displayResult(message = '') {
+         const resultText = document.getElementById('result-text');
+         resultText.innerHTML = message !== '' ? message : `${currentPlayer} Jeet Gaya re Baba`;
+         const resultPopup = document.getElementById('result-popup');
+         resultPopup.style.display = 'block';
+         gameOver = true;
+      }
+
+      function resetGame() {
+         const resultPopup = document.getElementById('result-popup');
+         resultPopup.style.display = 'none';
+         const buttons = document.getElementById('buttons');
+         buttons.style.display = 'none';
+         currentPlayer = 'Raju';
+         gameBoard.fill('');
+         cells.forEach(cell => cell.innerHTML = '');
+         gameOver = false;
+         firstClick = true;
+      }
+
+      function playClickSound() {
+         const rajuSound = document.getElementById('rajuSound');
+         const shyamSound = document.getElementById('shyamSound');
+         currentPlayer === 'Raju' ? rajuSound.play() : shyamSound.play();
+      }
+
+      function playWinSound() {
+         const winSound = document.getElementById('winSound');
+         winSound.play();
+      }
+
+      function playDrawSound() {
+         const drawSound = document.getElementById('drawSound');
+         drawSound.play();
+      }
+   </script>
+
+</body>
+
+</html>
