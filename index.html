@@ -2,225 +2,351 @@
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <style>
-   * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      -webkit-user-select: none;
-   }
-      body {
-         font-family: Arial, sans-serif;
-         margin: 0;
-         background-color: #091930;
-         color: #3BB09E;
+  <title>Hera Pheri Tic Tac Toe - Play Classic Bollywood Game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play *Hera Pheri* Tic Tac Toe, a fun and interactive game featuring beloved Bollywood characters from the iconic film. Enjoy this classic game with Raju and Shyam and experience the excitement of *Hera Pheri* in every move.">
+  <meta name="keywords" content="Hera Pheri, Tic Tac Toe, Bollywood game, Raju, Shyam, interactive game, nostalgic game, Bollywood characters, online Tic Tac Toe, fun game">
+  <meta name="author" content="Vivek Lohar">
+  <meta property="og:title" content="Hera Pheri Tic Tac Toe">
+  <meta property="og:description" content="Discover the ultimate gaming experience with *Hera Pheri* Tic Tac Toe. Play as Raju or Shyam and enjoy a nostalgic twist on the classic game with Bollywood flair.">
+  <meta property="og:image" content="babu.jpg">
+  <meta property="og:url" content="URL_of_your_game_page">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Hera Pheri Tic Tac Toe">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hera Pheri Tic Tac Toe">
+  <meta name="twitter:description" content="Play *Hera Pheri* Tic Tac Toe with characters from the iconic Bollywood film. Enjoy an engaging and fun game with Raju and Shyam.">
+  <meta name="twitter:image" content="URL_to_image_thumbnail_for_twitter">
+  <meta name="robots" content="index, follow">
+  <!-- opengraph meta tags -->
+  <meta property="og:title" content="Hera Pheri Tic Tac Toe - Play Classic Bollywood Game">
+  <meta property="og:description" content="Discover the ultimate gaming experience with *Hera Pheri* Tic Tac Toe. Play as Raju or Shyam and enjoy a nostalgic twist on the classic game with Bollywood flair.">
+  <meta property="og:image" content="babu.jpg">
+  <meta property="og:url" content="https://vivekmohanlohar.github.io/herapheritiktaktoe">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Hera Pheri Tic Tac Toe">
+  <!-- canonical tag -->
+  <link rel="canonical" href="https://vivekmohanlohar.github.io/herapheritiktaktoe">
+  <!-- favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- schema markup -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Game",
+      "name": "Hera Pheri Tic Tac Toe",
+      "description": "A fun and interactive Tic Tac Toe game featuring characters from the Bollywood film Hera Pheri.",
+      "image": "URL_to_image_thumbnail",
+      "url": "URL_of_your_game_page",
+      "author": {
+        "@type": "Organization",
+        "name": "Your Company Name"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Your Company Name"
       }
-      
-      main{
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         justify-content: center;
-         height: 100vh;
-      }
-      
-      img {
-         width: 100%;
-      }
+    }
+  </script>
 
-      #game-name {
-         font-size: 24px;
-         margin-bottom: 20px;
-      }
 
-      #board {
-         display: grid;
-         grid-template-columns: repeat(3, 100px);
-         grid-gap: 5px;
-      }
-
-      .cell {
-         width: 100px;
-         height: 100px;
-         border: 2px solid #333;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         cursor: pointer;
-         font-size: 24px;
-         background-color: #091930;
-         color: #3BB09E;
-         transition: background-color 0.3s;
-         overflow: hidden;
-      }
-
-      .cell:hover {
-         background-color: #3BB09E;
-         color: #091930;
-      }
-
-      #result-popup {
-         display: none;
-         position: fixed;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         padding: 20px;
-         background-color: #fff;
-         border: 2px solid #333;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-         text-align: center;
-         color: #3BB09E;
-      }
-
-      #result-popup img {
-         width: 100px;
-         height: 100px;
-         border-radius: 50%;
-         margin-bottom: 10px;
-      }
-
-      #buttons {
-         margin-top: 15px;
-         display: none;
-      }
-
-      button {
-         padding: 10px;
-         font-size: 16px;
-         cursor: pointer;
-         background-color: #091930;
-         color: #3BB09E;
-         border: 2px solid #3BB09E;
-         border-radius: 5px;
-         margin: 0 10px;
-      }
-   </style>
-   <title>Tic Tac Toe</title>
 </head>
+<!-- custom styles starts here -->
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+  }
+
+  element {
+    outline: none;
+  }
+
+
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background-color: #091930;
+    color: #3BB09E;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  h1 span {
+    color: #A7F6EA;
+    font-size: 1.1rem;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+  }
+
+  .cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    background-color: #091930;
+    color: #3BB09E;
+    transition: background-color 0.3s;
+    overflow: hidden;
+  }
+
+  .cell:hover {
+    background-color: #3BB09E;
+    color: #091930;
+  }
+
+  #result-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #3BB09E;
+  }
+
+  #result-popup img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  #buttons {
+    margin-top: 15px;
+    display: none;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #091930;
+    color: #3BB09E;
+    border: 2px solid #3BB09E;
+    border-radius: 5px;
+    margin: 0 10px;
+  }
+
+  .seo-content {
+    display: none;
+  }
+
+  /* footer */
+  footer {
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  .web-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border: 2px solid white lawngreen;
+    margin: .5rem 0 .5rem 0;
+  }
+
+  .web-icons a {
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white
+  }
+
+  .web-icons a i {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .web-icons a i {
+    color: var(--secondary);
+  }
+
+  i:hover {
+    margin-bottom: .5rem;
+    color: var(--theme-2);
+  }
+</style>
 
 <body>
-   <main>
+  <main>
+    <p class="seo-content">
+      Experience the ultimate fun with our Tic Tac Toe game featuring beloved characters from the iconic Bollywood movie *Hera Pheri*. This engaging online game lets you challenge your friends or family in a classic game of Tic Tac Toe with a unique twist. Play as Raju or Shyam and enjoy a nostalgic gaming experience that brings the humor and charm of the movie to your screen. Our game is designed with responsive graphics and intuitive controls, ensuring a seamless experience on any device. Whether you're a fan of the movie or simply looking for a fun and interactive way to pass the time, our *Hera Pheri* Tic Tac Toe game offers endless entertainment. Play now and see if you can outwit your opponent in this exciting game that combines strategy with a touch of Bollywood flair!
+    </p>
+    <p class="seo-content">
+      Discover the ultimate gaming experience with our *Hera Pheri* Tic Tac Toe game, a unique twist on the classic game that brings the beloved Bollywood characters from the iconic film to your screen. Immerse yourself in this nostalgic game where you can play as Raju, Shyam, or other memorable characters, adding a touch of Bollywood flair to your Tic Tac Toe experience. Our game features an intuitive interface and engaging graphics designed to captivate fans of the movie and game enthusiasts alike. With responsive design, you can enjoy this exciting game on any device, whether you're at home or on the go. Challenge your friends and family in this interactive and fun game that combines strategic thinking with a bit of humor from *Hera Pheri*. Perfect for fans of the film looking to relive their favorite moments or anyone seeking a quick and entertaining diversion, our *Hera Pheri* Tic Tac Toe game offers endless hours of enjoyment. Don’t miss out on this opportunity to add a bit of Bollywood magic to your day. Play now and see if you can outsmart your opponents in this thrilling and fun game that celebrates the spirit of one of Bollywood's most loved movies. Experience the joy of *Hera Pheri* with every move and make your gaming sessions more entertaining!
+    </p>
+    <h1>Hera Pheri Tic Tac Toe <br><span>Play the Ultimate <br>Bollywood-Themed Classic Game</span></h1>
+    <!-- game board starts here -->
+    <div id="board"></div>
 
-      <div id="game-name">Tic Tac Toe</div>
+    <div id="result-popup">
+      <img src="babu.jpg" alt="Baburao">
+      <p id="result-text"></p><br>
+      <button onclick="resetGame()">Play Again</button>
+    </div>
 
-      <div id="board"></div>
+    <div id="buttons">
+      <button onclick="resetGame()">Reset Game</button>
+    </div>
+    <audio id="rajuSound" src="turn_sound.mp3"></audio>
+    <audio id="shyamSound" src="turn_sound.mp3"></audio>
+    <audio id="winSound" src="win_sound.mp3"></audio>
+    <audio id="drawSound" src="draw_sound.mp3"></audio>
+  </main>
+  <footer>
+    Desined and Developed By
+    <h3 style="margin-top: .6rem;">Vivek Lohar</h3>
+    <div class="web-icons">
+      <a alt="Vivek Lohar LinkedIn Profile" href="https://in.linkedin.com/in/vivekmohanlohar" data-aos="fade-up" data-aos-offset="100" data-aos-delay="200"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a alt="Vivek Lohar Instagram Profile" href="https://www.instagram.com/vivekmohanlohar/" data-aos="fade-up" data-aos-offset="100" data-aos-delay="300"><i class="fa-brands fa-instagram"></i></a>
+      <a alt="Vivek Lohar portfolio website" href="https://vivekmohanlohar.github.io/viveklohar/" data-aos="fade-up" data-aos-offset="100" data-aos-delay="300"><i class="fa-solid fa-globe"></i></a>
+    </div>
+  </footer>
 
-      <div id="result-popup">
-         <img src="baburao_image.jpg" alt="Baburao">
-         <p id="result-text"></p><br>
-         <button onclick="resetGame()">Play Again</button>
-      </div>
+  <script>
+    const board = document.getElementById('board');
+    const cells = [];
+    let currentPlayer = 'Raju';
+    let gameOver = false;
+    let firstClick = true;
 
-      <div id="buttons">
-         <button onclick="resetGame()">Reset Game</button>
-      </div>
+    // Create cells and add click event
+    for (let i = 0; i < 9; i++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.addEventListener('click', () => makeMove(i));
+      board.appendChild(cell);
+      cells.push(cell);
+    }
 
-      <audio id="rajuSound" src="raju_sound.mp3"></audio>
-      <audio id="shyamSound" src="shyam_sound.mp3"></audio>
-      <audio id="winSound" src="win_sound.mp3"></audio>
-      <audio id="drawSound" src="draw_sound.mp3"></audio>
-   </main>
-   
-   <script>
-      const board = document.getElementById('board');
-      const cells = [];
-      let currentPlayer = 'Raju';
-      let gameOver = false;
-      let firstClick = true;
-
-      // Create cells and add click event
-      for (let i = 0; i < 9; i++) {
-         const cell = document.createElement('div');
-         cell.classList.add('cell');
-         cell.addEventListener('click', () => makeMove(i));
-         board.appendChild(cell);
-         cells.push(cell);
-      }
-
-      // Winning combinations
-      const winCombos = [
+    // Winning combinations
+    const winCombos = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
         [0, 4, 8], [2, 4, 6] // Diagonals
     ];
 
-      // Game state
-      const gameBoard = ['', '', '', '', '', '', '', '', ''];
+    // Game state
+    const gameBoard = ['', '', '', '', '', '', '', '', ''];
 
-      function makeMove(index) {
-         if (gameBoard[index] === '' && !gameOver) {
-            playClickSound();
+    function makeMove(index) {
+      if (gameBoard[index] === '' && !gameOver) {
+        playClickSound();
 
-            gameBoard[index] = currentPlayer === 'Raju' ? '<img src="raju_image.jpg" alt="Raju">' : '<img src="shyam_image.jpg" alt="Shyam">';
-            cells[index].innerHTML = gameBoard[index];
+        gameBoard[index] = currentPlayer === 'Raju' ? '<img src="raju.jpg" alt="Raju">' : '<img src="shyam.jpg" alt="Shyam">';
+        cells[index].innerHTML = gameBoard[index];
 
-            if (firstClick) {
-               firstClick = false;
-               const buttons = document.getElementById('buttons');
-               buttons.style.display = 'flex';
-            }
+        if (firstClick) {
+          firstClick = false;
+          const buttons = document.getElementById('buttons');
+          buttons.style.display = 'flex';
+        }
 
-            if (checkWinner()) {
-               playWinSound();
-               displayResult();
-            } else if (!gameBoard.includes('')) {
-               playDrawSound();
-               displayResult('It\'s a draw! Kya gamer banoge re tum');
-            } else {
-               currentPlayer = currentPlayer === 'Raju' ? 'Shyam' : 'Raju';
-            }
-         }
+        if (checkWinner()) {
+          playWinSound();
+          displayResult();
+        } else if (!gameBoard.includes('')) {
+          playDrawSound();
+          displayResult('dono ke dono bekar uthale re baba... dono ko');
+        } else {
+          currentPlayer = currentPlayer === 'Raju' ? 'Shyam' : 'Raju';
+        }
       }
+    }
 
-      function checkWinner() {
-         for (const combo of winCombos) {
-            const [a, b, c] = combo;
-            if (gameBoard[a] !== '' && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-               return true;
-            }
-         }
-         return false;
+    function checkWinner() {
+      for (const combo of winCombos) {
+        const [a, b, c] = combo;
+        if (gameBoard[a] !== '' && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+          return true;
+        }
       }
+      return false;
+    }
 
-      function displayResult(message = '') {
-         const resultText = document.getElementById('result-text');
-         resultText.innerHTML = message !== '' ? message : `${currentPlayer} Jeet Gaya re Baba`;
-         const resultPopup = document.getElementById('result-popup');
-         resultPopup.style.display = 'block';
-         gameOver = true;
-      }
+    function displayResult(message = '') {
+      const resultText = document.getElementById('result-text');
+      resultText.innerHTML = message !== '' ? message : `${currentPlayer} Jeet Gaya re Baba`;
+      const resultPopup = document.getElementById('result-popup');
+      resultPopup.style.display = 'block';
+      gameOver = true;
+    }
 
-      function resetGame() {
-         const resultPopup = document.getElementById('result-popup');
-         resultPopup.style.display = 'none';
-         const buttons = document.getElementById('buttons');
-         buttons.style.display = 'none';
-         currentPlayer = 'Raju';
-         gameBoard.fill('');
-         cells.forEach(cell => cell.innerHTML = '');
-         gameOver = false;
-         firstClick = true;
-      }
+    function resetGame() {
+      const resultPopup = document.getElementById('result-popup');
+      resultPopup.style.display = 'none';
+      const buttons = document.getElementById('buttons');
+      buttons.style.display = 'none';
+      currentPlayer = 'Raju';
+      gameBoard.fill('');
+      cells.forEach(cell => cell.innerHTML = '');
+      gameOver = false;
+      firstClick = true;
+    }
 
-      function playClickSound() {
-         const rajuSound = document.getElementById('rajuSound');
-         const shyamSound = document.getElementById('shyamSound');
-         currentPlayer === 'Raju' ? rajuSound.play() : shyamSound.play();
-      }
+    function playClickSound() {
+      const rajuSound = document.getElementById('rajuSound');
+      const shyamSound = document.getElementById('shyamSound');
+      currentPlayer === 'Raju' ? rajuSound.play() : shyamSound.play();
+    }
 
-      function playWinSound() {
-         const winSound = document.getElementById('winSound');
-         winSound.play();
-      }
+    function playWinSound() {
+      const winSound = document.getElementById('winSound');
+      winSound.play();
+    }
 
-      function playDrawSound() {
-         const drawSound = document.getElementById('drawSound');
-         drawSound.play();
-      }
-   </script>
+    function playDrawSound() {
+      const drawSound = document.getElementById('drawSound');
+      drawSound.play();
+    }
+  </script>
 
 </body>
 
